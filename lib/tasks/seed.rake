@@ -39,6 +39,9 @@ namespace :db do
     Load the seed data from db/seeds.rb, db/seeds/*.seeds.rb and db/seeds/ENVIRONMENT/*.seeds.rb.
     ENVIRONMENT is the current environment in Rails.env.
   EOT
-  override_task :seed => ['db:seed:common'] + override_dependency
-
+  override = override_task :seed => ['db:seed:common'] + override_dependency
+  puts 'OVERRIDDEN TASK', override.investigation
+  puts 'DB:SEED:ORIGINAL', Rake.application.lookup('db:seed:original').investigation
+  puts 'DB:SEED:COMMON', Rake.application.lookup('db:seed:common').investigation
+  puts 'NEW DB:SEED', Rake.application.lookup('db:seed').investigation
 end
